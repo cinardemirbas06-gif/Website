@@ -21,6 +21,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Script kaynaklarına erken bağlantı (yükleme hızı için) -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -29,6 +33,7 @@
     <!-- Framer Motion -->
     <script crossorigin src="https://unpkg.com/framer-motion@10.16.16/dist/framer-motion.js"></script>
     
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -68,8 +73,7 @@
             }
         }
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
         body { 
             background-color: #0a0f16; 
@@ -172,7 +176,7 @@
                 transition={{ delay: delay, duration: 0.4 }}
                 className="group relative block w-full h-32 md:h-40 rounded-[20px] overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.2)]"
             >
-                <img src={imgUrl} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-100" />
+                <img src={imgUrl} alt={title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-100" />
                 <div className="absolute inset-0 bg-gradient-to-t from-darkbg via-darkbg/60 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 w-full p-4">
                     <span className="text-blue-400 text-[10px] font-bold uppercase tracking-wider mb-0.5 block">{category}</span>
