@@ -20,7 +20,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: wct-next/package-lock.json
 
-      - name: WebCreatorTR'yi derle (Next.js static export)
+      - name: Ana sayfa ve WebCreatorTR'yi derle (Next.js static export)
         working-directory: wct-next
         run: |
           npm ci
@@ -28,6 +28,7 @@ jobs:
 
       - name: Derlenen çıktıyı köke kopyala
         run: |
+          cp wct-next/out/index.html index.html
           cp wct-next/out/webcreatortr.html webcreatortr.html
           rm -rf _next
           cp -r wct-next/out/_next _next

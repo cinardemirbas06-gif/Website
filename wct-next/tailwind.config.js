@@ -8,12 +8,14 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                serif: ['"Playfair Display"', 'serif'],
             },
             colors: {
                 darkbg: '#0a0f16',
                 accent: '#4f46e5',
             },
             animation: {
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                 marquee: 'marquee 25s linear infinite',
                 'marquee-reverse': 'marquee-reverse 25s linear infinite',
                 shine: 'shine 2s linear infinite',

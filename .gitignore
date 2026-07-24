@@ -2,9 +2,11 @@ smtp-config.php
 analytics.log
 error.log
 
-# webcreatortr.html ve _next/, wct-next/ Next.js projesinden CI'da
-# otomatik üretilir (bkz. .github/workflows/deploy.yml). Elle düzenlemeyin,
-# kaynak kod wct-next/pages/webcreatortr.js içindedir.
+# index.html, webcreatortr.html ve _next/, wct-next/ Next.js projesinden
+# CI'da otomatik üretilir (bkz. .github/workflows/deploy.yml). Elle
+# düzenlemeyin, kaynak kod wct-next/pages/index.js ve
+# wct-next/pages/webcreatortr.js içindedir.
+index.html
 webcreatortr.html
 _next/
 wct-next/node_modules/

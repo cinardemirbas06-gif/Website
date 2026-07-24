@@ -403,6 +403,8 @@ export default function WebCreatorTR() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>WebCreatorTR | Dijital Çözümler</title>
                 <meta name="description" content="Web sitesi kurulumu, hosting, domain, özel yazılım ve profesyonel tasarım destek hizmetleri." />
+                <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0f16'/%3E%3Ctext x='50' y='68' font-size='50' font-family='Arial, sans-serif' font-weight='bold' fill='%234f46e5' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E" />
+                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
                 <link rel="canonical" href="https://cinardemirbas.com.tr/webcreatortr.html" />
                 <meta name="theme-color" content="#0a0f16" />
                 <meta name="robots" content="index, follow" />
