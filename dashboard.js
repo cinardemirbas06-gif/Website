@@ -419,9 +419,43 @@ const initCryptoWidget = async () => {
             <div class="dash-list-item" style="padding:10px 12px; margin-bottom:6px;"><span style="font-weight:bold; display:flex; align-items:center; gap:8px;">₿ Bitcoin</span><span style="color:var(--dash-success); font-weight:600;">${formatUSD(prices['BTCUSDT'])}</span></div>
             <div class="dash-list-item" style="padding:10px 12px; margin-bottom:6px;"><span style="font-weight:bold; display:flex; align-items:center; gap:8px;">🔷 Ethereum</span><span style="color:var(--dash-success); font-weight:600;">${formatUSD(prices['ETHUSDT'])}</span></div>
         `;
-    } catch(e) { 
+    } catch(e) {
         console.error('Kripto verisi çekme hatası:', e);
-        container.innerHTML = '<div class="dash-empty">Piyasa verisi alınamadı.</div>'; 
+        container.innerHTML = '<div class="dash-empty">Piyasa verisi alınamadı.</div>';
+    }
+};
+
+const initSiteStatsWidget = async () => {
+    const container = document.getElementById('dash-site-stats');
+    if (!container) return;
+    try {
+        const res = await fetch('stats.php');
+        if (!res.ok) throw new Error('API Hatası');
+        const stats = await res.json();
+
+        const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        const pageLabels = { index: 'Ana Sayfa', webcreatortr: 'WebCreatorTR' };
+        const topPagesHtml = Object.entries(stats.byPage || {})
+            .map(([page, count]) => `<div style="display:flex; justify-content:space-between; font-size:12px; color:var(--dash-muted); padding:4px 0;"><span>${esc(pageLabels[page] || page)}</span><span style="font-weight:600;">${count}</span></div>`)
+            .join('');
+
+        const errorCount = stats.errorCount7Days ?? 0;
+        const recentErrorsHtml = (stats.recentErrors || [])
+            .map(err => `<div style="font-size:11px; color:var(--dash-danger); padding:3px 0; word-break:break-word;">${esc(err.page)}: ${esc(err.message)}</div>`)
+            .join('');
+
+        container.innerHTML = `
+            <div class="dash-list-item" style="padding:10px 12px; margin-bottom:6px;"><span style="font-weight:bold;">👁️ Toplam Ziyaret</span><span style="color:var(--dash-primary); font-weight:600;">${stats.total ?? 0}</span></div>
+            <div class="dash-list-item" style="padding:10px 12px; margin-bottom:6px;"><span style="font-weight:bold;">📅 Bugün</span><span style="color:var(--dash-primary); font-weight:600;">${stats.today ?? 0}</span></div>
+            <div class="dash-list-item" style="padding:10px 12px; margin-bottom:6px;"><span style="font-weight:bold;">🗓️ Son 7 Gün</span><span style="color:var(--dash-primary); font-weight:600;">${stats.last7Days ?? 0}</span></div>
+            <div class="dash-list-item" style="padding:10px 12px; margin-bottom:6px;"><span style="font-weight:bold;">🐞 Hata (7 gün)</span><span style="color:${errorCount > 0 ? 'var(--dash-danger)' : 'var(--dash-success)'}; font-weight:600;">${errorCount}</span></div>
+            ${topPagesHtml ? `<div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--dash-border);">${topPagesHtml}</div>` : ''}
+            ${recentErrorsHtml ? `<div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--dash-border);">${recentErrorsHtml}</div>` : ''}
+        `;
+    } catch (e) {
+        console.error('Site istatistikleri alınamadı:', e);
+        container.innerHTML = '<div class="dash-empty">İstatistikler alınamadı.</div>';
     }
 };
 
@@ -667,6 +701,7 @@ async function initDashboard() {
         
         initGreetingAndWeather();
         initCryptoWidget();
+        initSiteStatsWidget();
         renderSubs();
         renderHabits();
 

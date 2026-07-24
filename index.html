@@ -2,6 +2,26 @@
 <html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Sentry benzeri harici bir servis kullanmadan, basit istemci hata günlüğü.
+        // En erken noktada yüklenir ki React/Babel önyükleme hatalarını da yakalasın.
+        (function () {
+            var reported = 0;
+            function report(message) {
+                if (reported >= 3) return; // Aynı sayfa yüklemesinde en fazla 3 hata gönder
+                reported++;
+                try {
+                    fetch('log-error.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ page: 'index', message: String(message).slice(0, 500) })
+                    });
+                } catch (e) {}
+            }
+            window.addEventListener('error', function (e) { report(e.message || 'Bilinmeyen hata'); });
+            window.addEventListener('unhandledrejection', function (e) { report((e.reason && e.reason.message) || String(e.reason) || 'Promise reddedildi'); });
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ÇINAR DEMİRBAŞ | Premium Web Çözümleri</title>
     <meta name="description" content="İşinizi büyütecek modern web siteleri inşa ediyorum. Markanız için hızlı, duyarlı ve yüksek dönüşüm sağlayan web çözümleri.">
@@ -1759,9 +1779,65 @@
             )
         }
 
+        const NEWSLETTER_URL = 'https://welnvftcvovkbaoxpymv.supabase.co/rest/v1/newsletter_subscribers';
+        const NEWSLETTER_KEY = 'sb_publishable_IKuO9fu4Qa-_i7h4nsA8eQ_FjAnhxpN';
+
+        const NewsletterSignup = () => {
+            const [email, setEmail] = useState('');
+            const [status, setStatus] = useState('idle'); // idle, loading, success, error
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setStatus('loading');
+                try {
+                    const res = await fetch(NEWSLETTER_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': NEWSLETTER_KEY,
+                            'Authorization': `Bearer ${NEWSLETTER_KEY}`,
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify({ email })
+                    });
+                    if (!res.ok && res.status !== 409) throw new Error('İstek başarısız oldu');
+                    setStatus('success');
+                    setEmail('');
+                } catch (error) {
+                    console.error('Bülten kaydı hatası:', error);
+                    setStatus('error');
+                }
+            };
+
+            if (status === 'success') {
+                return <p className="text-accent text-sm font-medium">Teşekkürler! Bültene kaydoldunuz.</p>;
+            }
+
+            return (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-2 max-w-sm mx-auto">
+                    <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="E-posta adresiniz"
+                        className="w-full bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm text-white placeholder-gray-500 focus:border-accent outline-none transition-colors"
+                    />
+                    <button disabled={status === 'loading'} type="submit" className="shrink-0 bg-accent text-darkbg font-bold text-sm px-5 py-2 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50 whitespace-nowrap">
+                        {status === 'loading' ? '...' : 'Bültene Katıl'}
+                    </button>
+                    {status === 'error' && <p className="text-red-400 text-xs w-full text-center sm:text-left">Bir hata oluştu, tekrar deneyin.</p>}
+                </form>
+            );
+        };
+
         const Footer = () => (
             <footer className="border-t border-white/5 py-10 bg-[#06090f]">
-                <div className="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm space-y-3">
+                <div className="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm space-y-6">
+                    <div>
+                        <p className="text-gray-300 font-medium mb-3">Yeni yazılardan ve duyurulardan haberdar olun.</p>
+                        <NewsletterSignup />
+                    </div>
                     <div className="flex justify-center gap-6">
                         <a href="/privacy.html" className="hover:text-accent transition-colors">Gizlilik Politikası</a>
                         <a href="/terms.html" className="hover:text-accent transition-colors">Kullanım Şartları</a>
@@ -1837,6 +1913,19 @@
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<PortfolioApp />);
+    </script>
+    <script>
+        // Kişisel veri içermeyen, tek satırlık ziyaret sayacı (bkz. Gizlilik Politikası).
+        (function () {
+            try {
+                var body = JSON.stringify({ page: 'index' });
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon('track.php', new Blob([body], { type: 'application/json' }));
+                } else {
+                    fetch('track.php', { method: 'POST', body: body, headers: { 'Content-Type': 'application/json' } });
+                }
+            } catch (e) {}
+        })();
     </script>
 </body>
 </html>
