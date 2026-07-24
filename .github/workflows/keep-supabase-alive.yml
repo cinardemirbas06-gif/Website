@@ -14,6 +14,6 @@ jobs:
       - name: REST API'ye hafif bir istek at
         run: |
           curl -sS -o /dev/null -w "HTTP %{http_code}\n" \
-            "https://znzktpbgngksgastbeev.supabase.co/rest/v1/money_records?select=id&limit=1" \
-            -H "apikey: sb_publishable_avOlt4hF0mnXeEBFIpMdng_YKj2jloU" \
-            -H "Authorization: Bearer sb_publishable_avOlt4hF0mnXeEBFIpMdng_YKj2jloU"
+            "https://welnvftcvovkbaoxpymv.supabase.co/rest/v1/money_records?select=id&limit=1" \
+            -H "apikey: sb_publishable_IKuO9fu4Qa-_i7h4nsA8eQ_FjAnhxpN" \
+            -H "Authorization: Bearer sb_publishable_IKuO9fu4Qa-_i7h4nsA8eQ_FjAnhxpN"
