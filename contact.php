@@ -23,6 +23,12 @@ if (!$data || !is_array($data)) {
     respond(false, 'Geçersiz istek gönderildi.');
 }
 
+// Honeypot: bu alan görünmez şekilde forma eklenir, sadece botlar doldurur.
+// Doluysa isteği sessizce başarılıymış gibi sonlandır (bot'a bilgi sızdırma, e-posta gönderme).
+if (!empty($data['website'])) {
+    respond(true, 'Mesajınız başarıyla gönderildi.');
+}
+
 // Gelen veriyi temizle
 $name = sanitize($data['name'] ?? '');
 $email = sanitize($data['email'] ?? '');

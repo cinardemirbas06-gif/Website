@@ -1,0 +1,25 @@
+name: Lighthouse Performans Denetimi
+
+on:
+  workflow_run:
+    workflows: ["cPanel'e FTP ile Otomatik Yayınla"]
+    types:
+      - completed
+
+jobs:
+  lighthouse:
+    name: Canlı Siteyi Denetle
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Deploy'un sunucuya yayılması için bekle
+        run: sleep 30
+
+      - name: Lighthouse CI çalıştır
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            https://cinardemirbas.com.tr/
+            https://cinardemirbas.com.tr/webcreatortr.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Çınar Demirbaş | Blog</title>
+        <link>https://cinardemirbas.com.tr/#blog</link>
+        <description>Web geliştirme, React, Next.js ve Tailwind CSS üzerine yazılar.</description>
+        <language>tr</language>
+        <item>
+            <title>Neden Projelerimde Next.js Kullanıyorum?</title>
+            <link>https://cinardemirbas.com.tr/#blog</link>
+            <guid isPermaLink="false">why-nextjs</guid>
+            <category>Frameworks</category>
+            <description>Modern web geliştirmenin vazgeçilmezi olan Next.js'in sunduğu Server-Side Rendering, SEO avantajları ve geliştirici deneyimi üzerine bir bakış.</description>
+        </item>
+        <item>
+            <title>Tailwind CSS: Utility-First Yaklaşımının Gücü</title>
+            <link>https://cinardemirbas.com.tr/#blog</link>
+            <guid isPermaLink="false">tailwind-love</guid>
+            <category>CSS</category>
+            <description>Sürekli aynı CSS kodlarını yazmaktan sıkıldınız mı? Tailwind CSS'in "utility-first" felsefesiyle tasarım sistemlerini nasıl hızlandırdığını keşfedin.</description>
+        </item>
+        <item>
+            <title>React Hooks'un Büyüsü: useState ve useEffect</title>
+            <link>https://cinardemirbas.com.tr/#blog</link>
+            <guid isPermaLink="false">react-hooks</guid>
+            <category>React</category>
+            <description>Fonksiyonel bileşenlere state ve lifecycle özellikleri kazandıran useState ve useEffect hook'larının temel mantığı ve kullanım alanları.</description>
+        </item>
+    </channel>
+</rss>

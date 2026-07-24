@@ -6,6 +6,7 @@
     <title>ÇINAR DEMİRBAŞ | Premium Web Çözümleri</title>
     <meta name="description" content="İşinizi büyütecek modern web siteleri inşa ediyorum. Markanız için hızlı, duyarlı ve yüksek dönüşüm sağlayan web çözümleri.">
     <link rel="canonical" href="https://cinardemirbas.com.tr/">
+    <link rel="alternate" type="application/rss+xml" title="Çınar Demirbaş | Blog RSS" href="https://cinardemirbas.com.tr/feed.xml">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0f16'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial, sans-serif' font-weight='bold' fill='%234f46e5' text-anchor='middle'%3E%C3%87%3C/text%3E%3C/svg%3E">
     <meta name="theme-color" content="#0a0f16">
     <meta name="robots" content="index, follow">
@@ -1528,6 +1529,7 @@
 
         const Blog = () => {
             const [selectedPost, setSelectedPost] = useState(null);
+            const [searchQuery, setSearchQuery] = useState('');
 
             const posts = [
                 {
@@ -1561,8 +1563,33 @@
                     <section id="blog" className="py-24 relative bg-darkbg border-t border-white/5">
                         <div className="max-w-7xl mx-auto px-6 md:px-12">
                             <SectionHeader title="Yazılarım & İçeriklerim" subtitle="Blog" />
+                            <div className="max-w-md mx-auto mb-12 relative">
+                                <svg className="w-5 h-5 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder="Yazılarda ara..."
+                                    className="w-full bg-white/5 border border-white/10 rounded-full pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:border-accent outline-none transition-colors"
+                                />
+                            </div>
+                            {(() => {
+                                const q = searchQuery.trim().toLowerCase();
+                                const filteredPosts = q
+                                    ? posts.filter(post =>
+                                        post.title.toLowerCase().includes(q) ||
+                                        post.excerpt.toLowerCase().includes(q) ||
+                                        post.category.toLowerCase().includes(q)
+                                    )
+                                    : posts;
+
+                                if (filteredPosts.length === 0) {
+                                    return <p className="text-center text-gray-500 py-12">"{searchQuery}" için bir sonuç bulunamadı.</p>;
+                                }
+
+                                return (
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {posts.map((post, i) => (
+                                {filteredPosts.map((post, i) => (
                                     <Reveal key={post.id} delay={i * 0.15}>
                                         <div 
                                             className="group rounded-[20px] bg-white/[0.02] border border-white/10 overflow-hidden hover:border-accent/40 hover:shadow-[0_0_40px_rgba(79,70,229,0.1)] transition-all duration-500 cursor-pointer flex flex-col h-full"
@@ -1581,6 +1608,8 @@
                                     </Reveal>
                                 ))}
                             </div>
+                                );
+                            })()}
                         </div>
                     </section>
 
@@ -1634,7 +1663,7 @@
         );
 
         const Contact = () => {
-            const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+            const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '', website: '' });
             const [status, setStatus] = useState('idle'); // idle, loading, success, error
             const [formMessage, setFormMessage] = useState('');
 
@@ -1654,7 +1683,7 @@
                     const data = await res.json();
                     setStatus(data.success ? 'success' : 'error');
                     setFormMessage(data.message || (data.success ? 'Mesajınız başarıyla gönderildi.' : 'Gönderim başarısız oldu.'));
-                    if (data.success) setFormData({ name: '', email: '', phone: '', message: '' });
+                    if (data.success) setFormData({ name: '', email: '', phone: '', message: '', website: '' });
                 } catch (error) {
                     console.error("Form Gönderim Hatası Detayı:", error);
                     setStatus('error');
@@ -1698,6 +1727,7 @@
                                     </div>
                                 ) : (
                                     <form onSubmit={handleSubmit} className="space-y-4">
+                                        <input type="text" name="website" value={formData.website} onChange={handleChange} tabIndex="-1" autoComplete="off" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }} aria-hidden="true" />
                                         {status === 'error' && (
                                             <div className="bg-red-500/20 border border-red-500 text-red-400 p-4 rounded-xl text-sm">
                                                 {formMessage}
@@ -1731,7 +1761,11 @@
 
         const Footer = () => (
             <footer className="border-t border-white/5 py-10 bg-[#06090f]">
-                <div className="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
+                <div className="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm space-y-3">
+                    <div className="flex justify-center gap-6">
+                        <a href="/privacy.html" className="hover:text-accent transition-colors">Gizlilik Politikası</a>
+                        <a href="/terms.html" className="hover:text-accent transition-colors">Kullanım Şartları</a>
+                    </div>
                     <p>© {new Date().getFullYear()} ÇINAR DEMİRBAŞ. Tüm hakları saklıdır.</p>
                 </div>
             </footer>
@@ -1743,11 +1777,40 @@
             </a>
         );
 
+        const CookieBanner = () => {
+            const [visible, setVisible] = useState(false);
+
+            useEffect(() => {
+                if (!localStorage.getItem('cookie_consent')) setVisible(true);
+            }, []);
+
+            const accept = () => {
+                localStorage.setItem('cookie_consent', 'accepted');
+                setVisible(false);
+            };
+
+            if (!visible) return null;
+
+            return (
+                <div className="fixed bottom-0 left-0 right-0 z-[60] p-4 md:p-6">
+                    <div className="max-w-3xl mx-auto liquid-glass bg-darkbg/90 border border-white/10 rounded-2xl shadow-2xl p-5 md:p-6 flex flex-col md:flex-row items-center gap-4">
+                        <p className="text-sm text-gray-300 flex-grow text-center md:text-left">
+                            Bu site, deneyiminizi iyileştirmek için temel çerezler/yerel depolama kullanır. Devam ederek bunu kabul etmiş olursunuz. Detaylar için{' '}
+                            <a href="/privacy.html" className="text-accent underline hover:text-white transition-colors">Gizlilik Politikası</a>.
+                        </p>
+                        <button onClick={accept} className="shrink-0 bg-accent text-darkbg font-bold text-sm px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
+                            Kabul Et
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
         const PortfolioApp = () => {
 
             return (
                 <div className="min-h-screen flex flex-col font-sans relative text-white">
-                    
+
                     <Navbar />
                     <main className="flex-grow">
                         <Home />
@@ -1767,6 +1830,7 @@
                     </main>
                     <Footer />
                     <WhatsAppButton />
+                    <CookieBanner />
                 </div>
             );
         };
