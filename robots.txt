@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard.html
+Disallow: /money.html
+Disallow: /planner.html
+Disallow: /analysis.html
+Disallow: /notes.html
+Disallow: /login.html
+
+Sitemap: https://cinardemirbas.com.tr/sitemap.xml
