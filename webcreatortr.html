@@ -2,6 +2,26 @@
 <html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <script>
+        // Sentry benzeri harici bir servis kullanmadan, basit istemci hata günlüğü.
+        // En erken noktada yüklenir ki React/Babel önyükleme hatalarını da yakalasın.
+        (function () {
+            var reported = 0;
+            function report(message) {
+                if (reported >= 3) return; // Aynı sayfa yüklemesinde en fazla 3 hata gönder
+                reported++;
+                try {
+                    fetch('log-error.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ page: 'webcreatortr', message: String(message).slice(0, 500) })
+                    });
+                } catch (e) {}
+            }
+            window.addEventListener('error', function (e) { report(e.message || 'Bilinmeyen hata'); });
+            window.addEventListener('unhandledrejection', function (e) { report((e.reason && e.reason.message) || String(e.reason) || 'Promise reddedildi'); });
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebCreatorTR | Dijital Çözümler</title>
     <meta name="description" content="Web sitesi kurulumu, hosting, domain, özel yazılım ve profesyonel tasarım destek hizmetleri.">
@@ -887,6 +907,19 @@
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<LinkTreeApp />);
+    </script>
+    <script>
+        // Kişisel veri içermeyen, tek satırlık ziyaret sayacı (bkz. Gizlilik Politikası).
+        (function () {
+            try {
+                var body = JSON.stringify({ page: 'webcreatortr' });
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon('track.php', new Blob([body], { type: 'application/json' }));
+                } else {
+                    fetch('track.php', { method: 'POST', body: body, headers: { 'Content-Type': 'application/json' } });
+                }
+            } catch (e) {}
+        })();
     </script>
 </body>
 </html>
