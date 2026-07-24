@@ -9,6 +9,13 @@ if (window.__DASHBOARD_JS_LOADED__) {
   // dashboard.js içindeki tüm kodlar buraya gelecek
 }
 
+// --- PWA: Servis Çalışanı Kaydı (çevrimdışı erişim için) ---
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+}
+
 // --- TEMA YÖNETİMİ (DARK MODE) ---
 const savedTheme = localStorage.getItem('dash_theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);

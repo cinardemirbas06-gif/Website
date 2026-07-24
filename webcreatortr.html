@@ -415,6 +415,36 @@
             );
         };
 
+        const CookieBanner = ({ lang }) => {
+            const [visible, setVisible] = useState(false);
+
+            useEffect(() => {
+                if (!localStorage.getItem('cookie_consent')) setVisible(true);
+            }, []);
+
+            const accept = () => {
+                localStorage.setItem('cookie_consent', 'accepted');
+                setVisible(false);
+            };
+
+            if (!visible) return null;
+
+            return (
+                <div className="fixed bottom-0 left-0 right-0 z-[60] p-4 md:p-6">
+                    <div className="max-w-xl mx-auto liquid-glass bg-darkbg/90 border border-white/10 rounded-2xl shadow-2xl p-5 flex flex-col md:flex-row items-center gap-4">
+                        <p className="text-xs text-gray-300 flex-grow text-center md:text-left">
+                            {lang === 'tr'
+                                ? <>Bu site, deneyiminizi iyileştirmek için temel çerezler/yerel depolama kullanır. Devam ederek bunu kabul etmiş olursunuz. Detaylar için <a href="/privacy.html" className="text-accent underline hover:text-white transition-colors">Gizlilik Politikası</a>.</>
+                                : <>This site uses essential cookies/local storage to improve your experience. By continuing, you accept this. See <a href="/privacy.html" className="text-accent underline hover:text-white transition-colors">Privacy Policy</a>.</>}
+                        </p>
+                        <button onClick={accept} className="shrink-0 bg-accent text-darkbg font-bold text-xs px-5 py-2 rounded-full hover:opacity-90 transition-opacity">
+                            {lang === 'tr' ? 'Kabul Et' : 'Accept'}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
         const LinkTreeApp = () => {
             const [selectedServices, setSelectedServices] = useState([]);
             const [extraPages, setExtraPages] = useState(0);
@@ -820,8 +850,12 @@
                         </div>
                     </div>
 
-                    <motion.footer initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="mt-16 text-sm text-gray-600">
-                        &copy; {new Date().getFullYear()} WebCreatorTR. Tüm hakları saklıdır.
+                    <motion.footer initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="mt-16 text-sm text-gray-600 text-center space-y-3">
+                        <div className="flex justify-center gap-6">
+                            <a href="/privacy.html" className="hover:text-accent transition-colors">{lang === 'tr' ? 'Gizlilik Politikası' : 'Privacy Policy'}</a>
+                            <a href="/terms.html" className="hover:text-accent transition-colors">{lang === 'tr' ? 'Kullanım Şartları' : 'Terms of Use'}</a>
+                        </div>
+                        <p>&copy; {new Date().getFullYear()} WebCreatorTR. Tüm hakları saklıdır.</p>
                     </motion.footer>
 
                     {/* Fiyat Geçerlilik Süresi Uyarı Baloncuğu */}
@@ -846,6 +880,7 @@
                         )}
                     </AnimatePresence>
                 </div>
+                <CookieBanner lang={lang} />
                 </>
             );
         };
