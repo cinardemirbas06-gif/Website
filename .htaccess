@@ -8,6 +8,9 @@
     </IfModule>
 </Files>
 
+# Özel 404 sayfası
+ErrorDocument 404 /404.html
+
 # Metin tabanlı dosyaları sıkıştırarak transfer boyutunu küçült
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml
