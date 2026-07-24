@@ -106,6 +106,29 @@
         .prose strong { color: #2563eb; }
         .prose pre { background-color: #0a0f16; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; overflow-x: auto; border: 1px solid rgba(255,255,255,0.1); }
         .md-preview strong { font-weight: bold; color: #2563eb; }
+
+        /* Liquid Glass — Apple tarzı cam efekti */
+        [class*="backdrop-blur"] {
+            backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+            -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+        }
+        .liquid-glass {
+            position: relative;
+            isolation: isolate;
+        }
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0) 45%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-accent/30 selection:text-white">
@@ -237,7 +260,7 @@
                                     <img src="images/ciko.jpeg" alt="Çınar Demirbaş" className="relative w-16 h-16 rounded-full border-2 border-white/10 object-cover shadow-xl" />
                                     <div className="absolute bottom-0 right-0 w-4 h-4 bg-accent border-2 border-darkbg rounded-full"></div>
                                 </div>
-                                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-accent font-bold text-xs uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(37,99,235,0.1)]">
+                                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 liquid-glass text-accent font-bold text-xs uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(37,99,235,0.1)]">
                                     <span className="relative flex h-2.5 w-2.5">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
@@ -259,7 +282,7 @@
                                 <a href="#tools" className="bg-white/10 border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
                                     Araçlar
                                 </a>
-                                <a href="#contact" className="bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
+                                <a href="#contact" className="bg-white/5 border border-white/10 liquid-glass text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
                                     Teklif Al
                                 </a>
                             </div>
@@ -385,7 +408,7 @@
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {services.map((srv, idx) => (
                                 <Reveal key={idx} delay={idx * 0.1}>
-                                    <div className="bg-white/[0.02] border border-white/5 p-8 rounded-[20px] hover:border-accent/50 hover:bg-white/[0.04] transition-all duration-500 group h-full shadow-lg hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] relative overflow-hidden">
+                                    <div className="bg-white/[0.02] border border-white/5 liquid-glass p-8 rounded-[20px] hover:border-accent/50 hover:bg-white/[0.04] transition-all duration-500 group h-full shadow-lg hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-[50px] group-hover:bg-accent/20 transition-colors duration-500 pointer-events-none"></div>
                                         <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent mb-6 group-hover:animate-bounce group-hover:bg-accent group-hover:text-darkbg transition-all duration-500 shadow-inner">
                                             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={srv.icon}></path></svg>
@@ -468,7 +491,7 @@
             }, [inView, end]);
 
             return (
-                <div ref={nodeRef} className="flex flex-col items-center text-center p-6 bg-white/[0.02] border border-white/5 rounded-[20px] hover:border-accent/30 transition-colors duration-300">
+                <div ref={nodeRef} className="flex flex-col items-center text-center p-6 bg-white/[0.02] border border-white/5 liquid-glass rounded-[20px] hover:border-accent/30 transition-colors duration-300">
                     <h4 className="text-4xl md:text-5xl font-black text-white mb-2">{count}<span className="text-accent">{suffix}</span></h4>
                     <p className="text-gray-400 font-medium">{text}</p>
                 </div>
@@ -479,7 +502,7 @@
             <section className="py-20 border-t border-white/5 relative bg-white/[0.01]">
                 <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-6">
                     <Counter end={7} suffix="+" text="Tamamlanan Proje" />
-                    <div className="flex flex-col items-center justify-center text-center p-6 bg-white/[0.02] border border-white/5 rounded-[20px] hover:border-accent/30 transition-colors duration-300">
+                    <div className="flex flex-col items-center justify-center text-center p-6 bg-white/[0.02] border border-white/5 liquid-glass rounded-[20px] hover:border-accent/30 transition-colors duration-300">
                         <h4 className="text-xl md:text-2xl font-black text-white mb-2 flex items-center gap-3"><div className="w-5 h-5 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>Yükleniyor</h4>
                         <p className="text-gray-400 font-medium">Mutlu Müşteri</p>
                     </div>
@@ -1166,7 +1189,7 @@
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {visibleTools.map((tool, idx) => (
                                 <motion.div key={tool.id} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: (idx % 8) * 0.05 }} className="h-full">
-                                    <div onClick={() => setActiveTool(tool)} className="bg-white/[0.02] border border-white/5 p-8 rounded-[20px] hover:border-accent/50 hover:bg-white/[0.04] transition-all duration-500 group h-full shadow-lg relative cursor-pointer overflow-hidden">
+                                    <div onClick={() => setActiveTool(tool)} className="bg-white/[0.02] border border-white/5 liquid-glass p-8 rounded-[20px] hover:border-accent/50 hover:bg-white/[0.04] transition-all duration-500 group h-full shadow-lg relative cursor-pointer overflow-hidden">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-[50px] group-hover:bg-accent/10 transition-colors duration-500 pointer-events-none"></div>
                                         <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-accent group-hover:text-darkbg transition-all duration-500 shadow-inner">
                                             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={tool.icon}></path></svg>
@@ -1180,7 +1203,7 @@
 
                         {tools.length > 4 && (
                             <div className="mt-12 flex justify-center">
-                                <button onClick={() => setShowAll(!showAll)} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]' : 'bg-white/5 border border-white/10 text-gray-400 hover:bg-white/10 hover:text-white'}`}>
+                                <button onClick={() => setShowAll(!showAll)} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]' : 'bg-white/5 border border-white/10 liquid-glass text-gray-400 hover:bg-white/10 hover:text-white'}`}>
                                     {showAll ? 'Daha Az Göster' : 'Tüm Araçları Göster'}
                                     <svg className={`w-5 h-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
@@ -1371,7 +1394,7 @@
                         </div>
                         {items.length > 4 && (
                             <div className="mt-12 flex justify-center">
-                                <button onClick={toggleShowAll} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]' : 'bg-white/5 border border-white/10 text-gray-400 hover:bg-white/10 hover:text-white'}`}>
+                                <button onClick={toggleShowAll} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]' : 'bg-white/5 border border-white/10 liquid-glass text-gray-400 hover:bg-white/10 hover:text-white'}`}>
                                     {showAll ? 'Daha Az Göster' : 'Tüm Terimleri Göster'}
                                     <svg className={`w-5 h-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
@@ -1560,13 +1583,13 @@
                             
                             <div className="space-y-6">
                                 <div className="flex items-center gap-4 group cursor-pointer">
-                                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-darkbg transition-colors">
+                                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 liquid-glass flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-darkbg transition-colors">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                                     </div>
                                     <span className="text-lg text-white font-medium group-hover:text-accent transition-colors">iletisim@cinardemirbas.com.tr</span>
                                 </div>
                                 <div className="flex items-center gap-4 group cursor-pointer">
-                                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-darkbg transition-colors">
+                                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 liquid-glass flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-darkbg transition-colors">
                                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.98-10.834a1.44 1.44 0 10-2.88 0 1.44 1.44 0 002.88 0z"/></svg>
                                     </div>
                                     <span className="text-lg text-white font-medium group-hover:text-accent transition-colors">@cinardemirbas</span>
