@@ -45,18 +45,25 @@ $mail = new PHPMailer(true);
 try {
     // Sunucu Ayarları
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Hata ayıklama için bu satırı aktif edebilirsiniz
+    $smtpUser = getenv('SMTP_USERNAME');
+    $smtpPass = getenv('SMTP_PASSWORD');
+    if (!$smtpUser || !$smtpPass) {
+        error_log('contact.php: SMTP_USERNAME / SMTP_PASSWORD ortam değişkenleri tanımlı değil.');
+        respond(false, 'Sunucu yapılandırma hatası. Lütfen daha sonra tekrar deneyin.');
+    }
+
     $mail->isSMTP();
-    $mail->Host       = 'mail.cinardemirbas.com.tr'; // E-posta sunucunuzun adresi (hosting firmanızdan öğrenin)
+    $mail->Host       = getenv('SMTP_HOST') ?: 'mail.cinardemirbas.com.tr';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'iletisim@cinardemirbas.com.tr'; // E-posta adresiniz
-    $mail->Password   = 'cinarD2006'; // E-posta şifreniz
+    $mail->Username   = $smtpUser;
+    $mail->Password   = $smtpPass;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SSL için 'ssl' -> ENCRYPTION_SMTPS, TLS için 'tls' -> ENCRYPTION_STARTTLS
     $mail->Port       = 465; // SSL için genellikle 465, TLS için 587
     $mail->CharSet    = 'UTF-8';
 
     // Gönderen ve Alıcılar
-    $mail->setFrom('iletisim@cinardemirbas.com.tr', 'Çınar Demirbaş Web Formu'); // Gönderen adresi (genellikle username ile aynı)
-    $mail->addAddress('iletisim@cinardemirbas.com.tr', 'Çınar Demirbaş'); // Mesajın gideceği adres
+    $mail->setFrom($smtpUser, 'Çınar Demirbaş Web Formu'); // Gönderen adresi (genellikle username ile aynı)
+    $mail->addAddress($smtpUser, 'Çınar Demirbaş'); // Mesajın gideceği adres
     $mail->addReplyTo($email, $name); // Kullanıcı 'yanıtla' dediğinde form dolduranın adresine gider
 
     // E-posta İçeriği
