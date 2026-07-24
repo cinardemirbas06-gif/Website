@@ -1,0 +1,19 @@
+name: Supabase'i Uyanık Tut
+
+on:
+  schedule:
+    # Her 3 günde bir - Supabase ücretsiz planı 7 gün işlemsiz kalınca projeyi duraklatıyor
+    - cron: '0 6 */3 * *'
+  workflow_dispatch:
+
+jobs:
+  ping-supabase:
+    name: Supabase'e istek gönder
+    runs-on: ubuntu-latest
+    steps:
+      - name: REST API'ye hafif bir istek at
+        run: |
+          curl -sS -o /dev/null -w "HTTP %{http_code}\n" \
+            "https://znzktpbgngksgastbeev.supabase.co/rest/v1/money_records?select=id&limit=1" \
+            -H "apikey: sb_publishable_avOlt4hF0mnXeEBFIpMdng_YKj2jloU" \
+            -H "Authorization: Bearer sb_publishable_avOlt4hF0mnXeEBFIpMdng_YKj2jloU"
