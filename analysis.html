@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiz & Raporlar | Kişisel Panel</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Chart.js Kütüphanesi -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jsPDF ve html2canvas (PDF İndirme) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="dash-body" data-page="analysis">
+
+    <div class="dash-container">
+        <header class="dash-header">
+            <h1 class="dash-text-gradient">Analiz & Raporlar</h1>
+            <div class="dash-header-actions">
+                <button onclick="toggleTheme()" class="dash-btn dash-btn-outline" style="border:none; font-size:20px; padding:4px 8px;" title="Temayı Değiştir">🌗</button>
+                <button onclick="requestNotificationPermission()" class="dash-btn dash-btn-outline" style="border:none; font-size:20px; padding:4px 8px;" title="Bildirimleri Aç">🔔</button>
+                <button onclick="exportAnalysisToPDF()" class="dash-btn dash-btn-outline" style="border-color:var(--dash-purple); color:var(--dash-purple);">📄 PDF İndir</button>
+                <a href="dashboard.html" class="dash-btn dash-btn-outline">Dashboard'a Dön</a>
+                <button onclick="doLogout()" class="dash-btn dash-btn-outline" style="color:var(--dash-danger); border-color:var(--dash-danger);">Çıkış Yap</button>
+            </div>
+        </header>
+
+        <!-- Geniş Kapsamlı Son 6 Ay Grafiği -->
+        <div class="dash-card">
+            <h2 style="margin-bottom: 16px;">Son 6 Aylık Gelir / Gider Özeti</h2>
+            <div style="position: relative; width: 100%; height: 320px;">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Kategori Dağılımı ve Günlük Harcama Trendi -->
+        <div class="dash-split-grid">
+            <div class="dash-card"><h2 style="margin-bottom: 16px;">Tüm Zamanların Gider Dağılımı</h2><div style="position: relative; width: 100%; height: 260px;"><canvas id="categoryChart"></canvas></div></div>
+            <div class="dash-card"><h2 style="margin-bottom: 16px;">Bu Ayki Günlük Harcama Trendi</h2><div style="position: relative; width: 100%; height: 260px;"><canvas id="lineChart"></canvas></div></div>
+        </div>
+    </div>
+
+    <script src="supabase.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

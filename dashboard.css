@@ -1,0 +1,629 @@
+/* Modern iOS ve Glassmorphism Etkili Dashbaord Teması */
+:root {
+    --dash-bg: #f2f2f7;
+    --dash-card: #ffffff;
+    --dash-text: #1c1c1e;
+    --dash-muted: #8e8e93;
+    --dash-border: #e5e5ea;
+    
+    --dash-primary: #007aff;
+    --dash-success: #34c759;
+    --dash-danger: #ff3b30;
+    --dash-warning: #ff9500;
+    --dash-purple: #af52de;
+    
+    --dash-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    --dash-radius: 20px;
+    --dash-transition: all 0.3s ease;
+
+    --dash-input-bg: #f9f9f9;
+    --dash-item-bg: #f9f9f9;
+    
+    /* Yeni Gradient ve Glassmorphism Efektleri */
+    --dash-grad-primary: linear-gradient(135deg, #007aff 0%, #af52de 100%);
+    --dash-glass-bg: rgba(255, 255, 255, 0.65);
+    --dash-glass-border: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] {
+    --dash-bg: #0a0f16;
+    --dash-card: #111827;
+    --dash-text: #f3f4f6;
+    --dash-muted: #9ca3af;
+    --dash-border: #1f2937;
+    --dash-input-bg: #1f2937;
+    --dash-item-bg: #1f2937;
+    
+    --dash-glass-bg: rgba(17, 24, 39, 0.6);
+    --dash-glass-border: rgba(255, 255, 255, 0.05);
+}
+
+body.dash-body {
+    background-color: var(--dash-bg);
+    color: var(--dash-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    position: relative;
+    z-index: 0;
+}
+
+/* Estetik Arka Plan Renk Bulutları */
+body.dash-body::before, body.dash-body::after {
+    content: ''; position: fixed; z-index: -1; border-radius: 50%; filter: blur(120px); opacity: 0.5; pointer-events: none; transition: background 0.5s ease;
+}
+body.dash-body::before { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(0,122,255,0.2) 0%, transparent 70%); }
+body.dash-body::after { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(175,82,222,0.2) 0%, transparent 70%); }
+[data-theme="dark"] body.dash-body::before { background: radial-gradient(circle, rgba(0,122,255,0.15) 0%, transparent 70%); }
+[data-theme="dark"] body.dash-body::after { background: radial-gradient(circle, rgba(175,82,222,0.15) 0%, transparent 70%); }
+
+.dash-text-gradient {
+    background: var(--dash-grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.dash-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Header */
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.dash-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.dash-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Butonlar */
+.dash-btn {
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: var(--dash-transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dash-btn:active {
+    transform: scale(0.96);
+}
+
+.dash-btn-outline {
+    background: transparent;
+    color: var(--dash-primary);
+    border: 1px solid var(--dash-primary);
+}
+
+.dash-btn-outline:hover {
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.dash-btn-primary {
+    background: var(--dash-grad-primary);
+    border: none;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.dash-btn-primary:hover {
+    box-shadow: 0 8px 20px rgba(175, 82, 222, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Kartlar */
+.dash-card {
+    background: var(--dash-glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--dash-glass-border);
+    border-radius: var(--dash-radius);
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
+}
+
+.dash-card h2 {
+    margin-top: 0;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--dash-text);
+}
+
+/* İki Widget'ı Yan Yana Tutmak İçin Grid (Takvim & Form) */
+.dash-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 24px;
+}
+
+.dash-split-grid .dash-card {
+    margin-bottom: 0;
+    height: 100%;
+}
+
+#dashboard-widgets {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+@media (max-width: 850px) {
+    .dash-split-grid { grid-template-columns: 1fr; }
+}
+
+/* Üç Widget'ı Yan Yana Tutmak İçin Grid (Takvim & Form & Bugün Raporu) */
+.dash-3-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 24px;
+}
+
+.dash-3-grid .dash-card {
+    margin-bottom: 0;
+    height: 100%;
+}
+
+@media (max-width: 1100px) {
+    .dash-3-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 850px) {
+    .dash-3-grid { grid-template-columns: 1fr; }
+}
+
+/* Form Alanları */
+.dash-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.dash-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dash-form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dash-muted);
+}
+
+.dash-input, .dash-select, .dash-textarea {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--dash-border);
+    background: var(--dash-input-bg);
+    font-size: 15px;
+    font-family: inherit;
+    transition: var(--dash-transition);
+    outline: none;
+    color: var(--dash-text);
+}
+
+.dash-input:focus, .dash-select:focus, .dash-textarea:focus {
+    border-color: var(--dash-primary);
+    background: var(--dash-card);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.dash-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Özet Grid */
+.dash-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.dash-summary-item {
+    background: var(--dash-glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--dash-glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.dash-summary-item p {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dash-muted);
+}
+
+.dash-summary-item h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+/* Liste Öğeleri */
+.dash-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dash-list-item {
+    background: var(--dash-item-bg);
+    border: 1px solid var(--dash-border);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dash-list-item.overdue {
+    border-left: 4px solid var(--dash-danger);
+    background: rgba(255, 59, 48, 0.1);
+}
+
+.dash-item-info {
+    flex: 1;
+}
+
+.dash-item-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.dash-item-meta {
+    font-size: 12px;
+    color: var(--dash-muted);
+    display: flex;
+    gap: 10px;
+}
+
+.dash-badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.badge-success { background: rgba(52, 199, 89, 0.15); color: var(--dash-success); }
+.badge-danger { background: rgba(255, 59, 48, 0.15); color: var(--dash-danger); }
+.badge-warning { background: rgba(255, 149, 0, 0.15); color: var(--dash-warning); }
+.badge-primary { background: rgba(0, 122, 255, 0.15); color: var(--dash-primary); }
+
+/* Yükleniyor ve Boş Durum */
+.dash-loading, .dash-empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--dash-muted);
+    font-size: 14px;
+}
+
+/* Takvim Stilleri */
+.cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--dash-text);
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.cal-day-name {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dash-muted);
+    padding-bottom: 8px;
+}
+
+.cal-day {
+    background: var(--dash-item-bg);
+    border: 1px solid var(--dash-border);
+    border-radius: 12px;
+    min-height: 70px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: var(--dash-transition);
+}
+
+.cal-day:hover {
+    border-color: var(--dash-primary);
+    background: var(--dash-card);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.1);
+}
+
+.cal-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.cal-day.empty:hover {
+    box-shadow: none;
+    background: transparent;
+}
+
+.cal-day.selected {
+    border-color: var(--dash-primary);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3);
+    background: rgba(0, 122, 255, 0.05);
+}
+
+.cal-day.today {
+    border-color: var(--dash-primary);
+    background: rgba(0, 122, 255, 0.05);
+}
+
+.cal-date-num {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.cal-day.today .cal-date-num {
+    color: var(--dash-primary);
+}
+
+.cal-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: auto;
+}
+
+.cal-val {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 4px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cal-inc {
+    background: rgba(52, 199, 89, 0.15);
+    color: var(--dash-success);
+}
+
+.cal-exp {
+    background: rgba(255, 59, 48, 0.15);
+    color: var(--dash-danger);
+}
+
+@media (max-width: 600px) {
+    .cal-grid { gap: 4px; }
+    .cal-day { padding: 4px; min-height: 55px; border-radius: 8px; }
+    .cal-val { font-size: 9px; padding: 2px; }
+    .cal-date-num { font-size: 11px; }
+}
+
+/* Toast Bildirim */
+.dash-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--dash-success);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: var(--dash-shadow);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+.dash-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.dash-toast.error {
+    background: var(--dash-danger);
+}
+
+/* Sayfa Geçiş Animasyonu (Loader) */
+.dash-page-loader {
+    position: fixed;
+    inset: 0;
+    background: var(--dash-bg);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.4s ease;
+}
+.dash-page-loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.dash-spinner-global {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--dash-border);
+    border-top-color: var(--dash-primary);
+    border-radius: 50%;
+    animation: dash-spin-global 0.8s linear infinite;
+}
+@keyframes dash-spin-global {
+    to { transform: rotate(360deg); }
+}
+
+/* Sürükle-Bırak (Drag & Drop) Widget Stilleri */
+.draggable-widget {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.draggable-widget.dragging {
+    opacity: 0.5;
+    transform: scale(0.98);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+[data-theme="dark"] .draggable-widget.dragging {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.widget-handle {
+    cursor: grab;
+    user-select: none;
+}
+.widget-handle:active {
+    cursor: grabbing;
+}
+
+/* ========================================================= */
+/* MOBİL UYUMLULUK (TÜM EKRANLAR İÇİN RESPONSIVE OPTİMİZASYON) */
+/* ========================================================= */
+
+@media (max-width: 850px) {
+    .dash-split-grid, .dash-3-grid {
+        grid-template-columns: 1fr !important;
+    }
+    #dashboard-widgets {
+        grid-template-columns: 1fr !important;
+    }
+    .dash-header-actions {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .dash-container {
+        padding: 15px 10px;
+    }
+    
+    .dash-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .dash-header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .dash-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+        flex: 1; /* Butonları mobilde ekrana yayar */
+        text-align: center;
+    }
+
+    .dash-card {
+        padding: 16px;
+    }
+
+    /* 4'lü kartları mobilde 2'li yan yana yapalım */
+    .dash-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* Listeler mobilde sıkışmasın diye dikey yapıya geçsin */
+    .dash-list-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .dash-list-item > div:last-child {
+        width: 100%;
+        text-align: left !important;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px dashed var(--dash-border);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .dash-list-item > div:last-child > div {
+        width: 100%;
+        text-align: left !important;
+        margin-bottom: 4px !important;
+    }
+    
+    .dash-list-item > div:last-child br {
+        display: none;
+    }
+
+    /* Formları mobilde tam genişlik yapalım */
+    .dash-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-header h1 {
+        font-size: 24px;
+    }
+    
+    /* Grafikleri mobilde biraz daha sıkıştıralım */
+    .dash-card canvas {
+        max-height: 220px !important;
+    }
+
+    /* Bildirim mesajı mobilde tam genişlik olsun */
+    .dash-toast {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .dash-header-actions .dash-btn {
+        flex: 1 1 45%; /* Butonlar en küçük ekranda 2'li alt alta iner */
+    }
+    .dash-summary-item h3 {
+        font-size: 18px;
+    }
+}

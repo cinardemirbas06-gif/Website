@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap | Kişisel Panel</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="dash-body" data-page="login">
+    <div class="dash-container" style="max-width: 400px; margin-top: 8vh;">
+        <div class="dash-card" style="text-align:center;">
+            <div style="width:60px; height:60px; background:var(--dash-primary); border-radius:16px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:24px; font-weight:bold; box-shadow:0 8px 20px rgba(0,122,255,0.4);">Ç</div>
+            <h2 style="font-size:24px; margin-bottom:8px;">Panele Giriş</h2>
+            <p style="color:var(--dash-muted); margin-bottom:24px; font-size:14px;">Güvenli alana erişmek için şifrenizi girin.</p>
+            
+            <form id="login-form" style="text-align:left;">
+                <div class="dash-form-group" style="margin-bottom:30px;">
+                    <label>Şifre</label>
+                    <input type="password" id="login-password" class="dash-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="dash-btn dash-btn-primary" style="width:100%; padding:14px; font-size:16px;">Giriş Yap</button>
+            </form>
+            <div style="margin-top:24px; display:flex; justify-content:space-between; align-items:center;">
+                <a href="index.html" style="color:var(--dash-primary); font-size:14px; text-decoration:none; font-weight:600;">← Ana Siteye Dön</a>
+                <button onclick="toggleTheme()" class="dash-btn dash-btn-outline" style="border:none; font-size:20px; padding:0;" title="Temayı Değiştir">🌗</button>
+            </div>
+        </div>
+    </div>
+    <script src="supabase.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

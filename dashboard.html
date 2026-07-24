@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişisel Panel | Çınar Demirbaş</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Supabase CDN -->
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body class="dash-body" data-page="dashboard">
+
+    <div class="dash-container">
+        <header class="dash-header">
+            <h1 class="dash-text-gradient">Kişisel Panel</h1>
+            <div class="dash-header-actions">
+                <button onclick="toggleTheme()" class="dash-btn dash-btn-outline" style="border:none; font-size:20px; padding:4px 8px;" title="Temayı Değiştir">🌗</button>
+                <button onclick="requestNotificationPermission()" class="dash-btn dash-btn-outline" style="border:none; font-size:20px; padding:4px 8px;" title="Bildirimleri Aç">🔔</button>
+                <a href="index.html" class="dash-btn dash-btn-outline">Ana Siteye Dön</a>
+                <button onclick="doLogout()" class="dash-btn dash-btn-outline" style="color:var(--dash-danger); border-color:var(--dash-danger);">Çıkış Yap</button>
+            </div>
+        </header>
+
+        <section style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px; margin-bottom:24px;">
+            <a href="money.html" class="dash-card dash-btn-outline" style="text-align:center; padding:20px; margin-bottom:0; text-decoration:none;">💳 <span style="margin-left:8px; font-weight:bold;">Para & Borç Takibi</span></a>
+            <a href="planner.html" class="dash-card dash-btn-outline" style="text-align:center; padding:20px; margin-bottom:0; text-decoration:none;">🗓️ <span style="margin-left:8px; font-weight:bold;">Günlük Plan</span></a>
+            <a href="analysis.html" class="dash-card dash-btn-outline" style="text-align:center; padding:20px; margin-bottom:0; text-decoration:none;">📊 <span style="margin-left:8px; font-weight:bold;">Analiz & Raporlar</span></a>
+            <a href="notes.html" class="dash-card dash-btn-outline" style="text-align:center; padding:20px; margin-bottom:0; text-decoration:none;">📝 <span style="margin-left:8px; font-weight:bold;">Kişisel Notlar</span></a>
+        </section>
+
+        <div class="dash-card" style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px; padding: 20px 30px;">
+            <div>
+                <h2 id="dash-greeting-text" style="margin:0; font-size:24px;" class="dash-text-gradient">Günaydın ☕️</h2>
+                <p style="color:var(--dash-muted); margin-top:4px;">Bugün harika bir gün olacak.</p>
+            </div>
+            <div id="dash-weather" style="font-size:24px; font-weight:bold; color:var(--dash-text);">🌤️ Yükleniyor...</div>
+        </div>
+
+        <section class="dash-summary-grid">
+            <div class="dash-summary-item">
+                <p>Bu Ay Gelecek Para</p>
+                <h3 id="sum-income">...</h3>
+            </div>
+            <div class="dash-summary-item">
+                <p>Bu Ay Ödenecek</p>
+                <h3 id="sum-payment">...</h3>
+            </div>
+            <div class="dash-summary-item">
+                <p>Toplam Açık Borç</p>
+                <h3 id="sum-debt">...</h3>
+            </div>
+            <div class="dash-summary-item">
+                <p>Bugünkü Planlar</p>
+                <h3 id="sum-plans">...</h3>
+            </div>
+            <div class="dash-summary-item">
+                <p>Yaklaşan Ödemeler</p>
+                <h3 id="sum-upcoming" style="color:var(--dash-purple)">...</h3>
+            </div>
+        </section>
+
+        <!-- Tüm 4 Kartı Tek Bir Sürükle-Bırak Alanına (Grid) Topluyoruz -->
+        <div class="dash-split-grid" id="dashboard-widgets">
+            <div class="dash-card draggable-widget" draggable="true" data-id="widget-chart">
+                <h2 class="widget-handle" style="margin-bottom: 16px;"><span style="opacity:0.3; margin-right:8px;">⋮⋮</span>Haftalık Finansal Bakış</h2>
+                <div style="position: relative; width: 100%; height: 250px;">
+                    <canvas id="dashMainChart"></canvas>
+                </div>
+            </div>
+            <div class="dash-card draggable-widget" draggable="true" data-id="widget-recent">
+                <h2 class="widget-handle" style="margin-bottom: 16px;"><span style="opacity:0.3; margin-right:8px;">⋮⋮</span>Son İşlemler</h2>
+                <div id="dash-recent-txs" class="dash-list" style="max-height: 250px; overflow-y: auto; padding-right:5px;"></div>
+            </div>
+            <div class="dash-card draggable-widget" draggable="true" data-id="widget-agenda">
+                <h2 class="widget-handle" style="margin-bottom: 16px;"><span style="opacity:0.3; margin-right:8px;">⋮⋮</span>Bugünün Ajandası</h2>
+                <div id="dash-today-plans" class="dash-list" style="max-height: 250px; overflow-y: auto; padding-right:5px;"></div>
+            </div>
+            <div class="dash-card draggable-widget" draggable="true" data-id="widget-budget">
+                <h2 class="widget-handle" style="margin-bottom: 16px;"><span style="opacity:0.3; margin-right:8px;">⋮⋮</span>Bütçe Durumu (Bu Ay)</h2>
+                <div id="dash-budget-overview" style="display:flex; flex-direction:column; gap:16px; max-height: 250px; overflow-y: auto; padding-right:5px;"></div>
+            </div>
+            <div class="dash-card draggable-widget" draggable="true" data-id="widget-crypto">
+                <h2 class="widget-handle" style="margin-bottom: 16px;"><span style="opacity:0.3; margin-right:8px;">⋮⋮</span>Canlı Piyasalar</h2>
+                <div id="dash-crypto-list" class="dash-list">Yükleniyor...</div>
+            </div>
+            <div class="dash-card draggable-widget" draggable="true" data-id="widget-subs">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px;">
+                    <h2 class="widget-handle" style="margin:0;"><span style="opacity:0.3; margin-right:8px;">⋮⋮</span>Aboneliklerim</h2>
+                    <button class="dash-btn dash-btn-outline" style="padding:4px 8px; font-size:11px;" onclick="addSubscription()">Ekle</button>
+                </div>
+                <div id="dash-subs-list" class="dash-list"></div>
+            </div>
+            <div class="dash-card draggable-widget" draggable="true" data-id="widget-habit">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px;">
+                    <h2 class="widget-handle" style="margin:0;"><span style="opacity:0.3; margin-right:8px;">⋮⋮</span>Alışkanlık Zinciri</h2>
+                    <button class="dash-btn dash-btn-outline" style="padding:4px 8px; font-size:11px;" onclick="addHabit()">Yeni</button>
+                </div>
+                <div id="dash-habit-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

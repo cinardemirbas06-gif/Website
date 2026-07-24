@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Günlük Plan | Kişisel Panel</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Chart.js ve SheetJS (Excel) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body class="dash-body" data-page="planner">
+
+    <div class="dash-container">
+        <header class="dash-header">
+            <h1 class="dash-text-gradient">Günlük Plan</h1>
+            <div class="dash-header-actions">
+                <button onclick="toggleTheme()" class="dash-btn dash-btn-outline" style="border:none; font-size:20px; padding:4px 8px;" title="Temayı Değiştir">🌗</button>
+                <button onclick="requestNotificationPermission()" class="dash-btn dash-btn-outline" style="border:none; font-size:20px; padding:4px 8px;" title="Bildirimleri Aç">🔔</button>
+                <a href="dashboard.html" class="dash-btn dash-btn-outline">Dashboard'a Dön</a>
+                <a href="index.html" class="dash-btn dash-btn-outline">Ana Siteye Dön</a>
+                <button onclick="doLogout()" class="dash-btn dash-btn-outline" style="color:var(--dash-danger); border-color:var(--dash-danger);">Çıkış Yap</button>
+            </div>
+        </header>
+
+        <div class="dash-summary-grid">
+            <div class="dash-summary-item"><p>Bugünkü Planlar</p><h3 id="p-sum-today" style="color:var(--dash-primary)">...</h3></div>
+            <div class="dash-summary-item"><p>Bu Ay Tamamlanan</p><h3 id="p-sum-done" style="color:var(--dash-success)">...</h3></div>
+            <div class="dash-summary-item"><p>Bu Ay Bekleyen</p><h3 id="p-sum-pending" style="color:var(--dash-warning)">...</h3></div>
+            <div class="dash-summary-item"><p>Aylık Başarı Oranı</p><h3 id="p-sum-rate" style="color:var(--dash-purple)">...</h3></div>
+        </div>
+
+        <div class="dash-3-grid">
+            <div class="dash-card">
+                <div class="cal-header">
+                    <button class="dash-btn dash-btn-outline" style="padding:4px 12px;" onclick="changePMonth(-1)">Önceki</button>
+                    <h3 id="cal-p-month-year" style="margin:0;">...</h3>
+                    <button class="dash-btn dash-btn-outline" style="padding:4px 12px;" onclick="changePMonth(1)">Sonraki</button>
+                </div>
+                <div id="cal-p-grid" class="cal-grid" style="margin-top: 16px;"></div>
+
+                <div id="selected-p-day-widget" style="display: none; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--dash-border);">
+                    <h3 id="selected-p-day-title" style="margin-top:0; margin-bottom:8px; font-size:16px;">Seçilen Gün</h3>
+                    <div id="selected-p-day-list" class="dash-list" style="margin-bottom: 16px; max-height: 250px; overflow-y: auto;"></div>
+                    <button class="dash-btn dash-btn-outline" onclick="goToPAddRecord()" style="width: 100%;">Bu Tarihe Plan Ekle</button>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <h2>Yeni Plan Ekle</h2>
+                <form id="planner-form">
+                    <div class="dash-form-grid">
+                        <div class="dash-form-group"><label>Tarih</label><input type="date" id="p-date" class="dash-input" required></div>
+                        <div class="dash-form-group"><label>Başlangıç</label><input type="time" id="p-start" class="dash-input" required></div>
+                        <div class="dash-form-group"><label>Bitiş</label><input type="time" id="p-end" class="dash-input" required></div>
+                        <div class="dash-form-group"><label>Başlık</label><input type="text" id="p-title" class="dash-input" required></div>
+                        
+                        <div class="dash-form-group">
+                            <label>Kategori</label>
+                            <select class="dash-select" id="p-category" required>
+                                <option value="Okul">Okul</option>
+                                <option value="Spor">Spor</option>
+                                <option value="Ders">Ders</option>
+                                <option value="İş">İş</option>
+                                <option value="Dışarı">Dışarı</option>
+                                <option value="Yemek">Yemek</option>
+                                <option value="Dinlenme">Dinlenme</option>
+                                <option value="Diğer">Diğer</option>
+                            </select>
+                        </div>
+                        
+                        <div class="dash-form-group">
+                            <label>Öncelik</label>
+                            <select class="dash-select" id="p-priority" required>
+                                <option value="Düşük">Düşük</option>
+                                <option value="Orta" selected>Orta</option>
+                                <option value="Yüksek">Yüksek</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="dash-form-group" style="margin-bottom:16px;">
+                        <label>Tekrar (Hafta Sayısı)</label>
+                        <input type="number" id="p-repeat" class="dash-input" placeholder="Tek seferlik ise boş bırakın. Örn: 4 (4 hafta aynı gün)" min="2">
+                    </div>
+                    <div class="dash-form-group" style="margin-bottom:16px;">
+                        <label>Açıklama (Opsiyonel)</label>
+                        <textarea id="p-desc" class="dash-textarea"></textarea>
+                    </div>
+                    <button type="submit" class="dash-btn dash-btn-primary" style="width:100%;">Planı Ekle</button>
+                </form>
+            </div>
+
+            <!-- Analiz ve Bugün Widget'ı -->
+            <div class="dash-card">
+                <h2 style="margin-bottom: 16px;">Bugünkü Görevler</h2>
+                <div id="p-today-list" style="margin-bottom:24px; max-height:160px; overflow-y:auto; padding-right:5px;"></div>
+                
+                <div class="cal-header" style="margin-top: 24px; margin-bottom: 16px;">
+                    <button class="dash-btn dash-btn-outline" style="padding:4px 10px; font-size:11px;" onclick="changePStatsMonth(-1)">Önceki</button>
+                    <h3 id="p-stats-month-year" style="margin:0; font-size:15px; text-align:center;">Dağılım</h3>
+                    <button class="dash-btn dash-btn-outline" style="padding:4px 10px; font-size:11px;" onclick="changePStatsMonth(1)">Sonraki</button>
+                </div>
+                <div style="position: relative; width: 100%; aspect-ratio: 1; max-height: 200px; margin: 0 auto;">
+                    <canvas id="pMonthlyChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arama ve Filtreleme -->
+        <div class="dash-card" style="background:transparent; box-shadow:none; padding:0; margin-bottom:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <input type="text" id="p-search" class="dash-input" placeholder="Planlarda ara..." style="flex:1; min-width:200px;">
+            <select id="p-filter-status" class="dash-select" style="width:auto;">
+                <option value="All">Tüm Durumlar</option>
+                <option value="Yapılacak">Sadece Yapılacaklar</option>
+                <option value="Yapıldı">Tamamlananlar</option>
+            </select>
+            <button class="dash-btn dash-btn-outline" style="padding:12px 16px; border-color:var(--dash-success); color:var(--dash-success);" onclick="exportPToExcel()">
+                <span style="margin-right:4px;">📊</span> Excel İndir
+            </button>
+        </div>
+        
+        <div class="dash-list" id="planner-list">
+            <!-- Planlar JS ile buraya gelecek -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
