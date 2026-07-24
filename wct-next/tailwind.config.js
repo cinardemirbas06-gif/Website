@@ -12,7 +12,7 @@ module.exports = {
             },
             colors: {
                 darkbg: '#0a0f16',
-                accent: '#4f46e5',
+                accent: '#d4af37',
             },
             animation: {
                 'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

@@ -6,7 +6,7 @@
     --dash-muted: #8e8e93;
     --dash-border: #e5e5ea;
     
-    --dash-primary: #4f46e5;
+    --dash-primary: #d4af37;
     --dash-success: #34c759;
     --dash-danger: #ff3b30;
     --dash-warning: #ff9500;
@@ -20,7 +20,7 @@
     --dash-item-bg: #f9f9f9;
     
     /* Yeni Gradient ve Glassmorphism Efektleri */
-    --dash-grad-primary: linear-gradient(135deg, #4f46e5 0%, #af52de 100%);
+    --dash-grad-primary: linear-gradient(135deg, #d4af37 0%, #af52de 100%);
     --dash-glass-bg: rgba(255, 255, 255, 0.65);
     --dash-glass-border: rgba(255, 255, 255, 0.4);
 }
@@ -53,9 +53,9 @@ body.dash-body {
 body.dash-body::before, body.dash-body::after {
     content: ''; position: fixed; z-index: -1; border-radius: 50%; filter: blur(120px); opacity: 0.5; pointer-events: none; transition: background 0.5s ease;
 }
-body.dash-body::before { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(79,70,229,0.2) 0%, transparent 70%); }
+body.dash-body::before { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%); }
 body.dash-body::after { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(175,82,222,0.2) 0%, transparent 70%); }
-[data-theme="dark"] body.dash-body::before { background: radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%); }
+[data-theme="dark"] body.dash-body::before { background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%); }
 [data-theme="dark"] body.dash-body::after { background: radial-gradient(circle, rgba(175,82,222,0.15) 0%, transparent 70%); }
 
 .dash-text-gradient {
@@ -121,14 +121,14 @@ body.dash-body::after { bottom: -10%; right: -10%; width: 50vw; height: 50vw; ba
 }
 
 .dash-btn-outline:hover {
-    background: rgba(79, 70, 229, 0.1);
+    background: rgba(212, 175, 55, 0.1);
 }
 
 .dash-btn-primary {
     background: var(--dash-grad-primary);
     border: none;
     color: #fff;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
 .dash-btn-primary:hover {
@@ -250,7 +250,7 @@ body.dash-body::after { bottom: -10%; right: -10%; width: 50vw; height: 50vw; ba
 .dash-input:focus, .dash-select:focus, .dash-textarea:focus {
     border-color: var(--dash-primary);
     background: var(--dash-card);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
 .dash-textarea {
@@ -339,7 +339,7 @@ body.dash-body::after { bottom: -10%; right: -10%; width: 50vw; height: 50vw; ba
 .badge-success { background: rgba(52, 199, 89, 0.15); color: var(--dash-success); }
 .badge-danger { background: rgba(255, 59, 48, 0.15); color: var(--dash-danger); }
 .badge-warning { background: rgba(255, 149, 0, 0.15); color: var(--dash-warning); }
-.badge-primary { background: rgba(79, 70, 229, 0.15); color: var(--dash-primary); }
+.badge-primary { background: rgba(212, 175, 55, 0.15); color: var(--dash-primary); }
 
 /* Yükleniyor ve Boş Durum */
 .dash-loading, .dash-empty {
@@ -392,7 +392,7 @@ body.dash-body::after { bottom: -10%; right: -10%; width: 50vw; height: 50vw; ba
 .cal-day:hover {
     border-color: var(--dash-primary);
     background: var(--dash-card);
-    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
 }
 
 .cal-day.empty {
@@ -408,13 +408,13 @@ body.dash-body::after { bottom: -10%; right: -10%; width: 50vw; height: 50vw; ba
 
 .cal-day.selected {
     border-color: var(--dash-primary);
-    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
-    background: rgba(79, 70, 229, 0.05);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+    background: rgba(212, 175, 55, 0.05);
 }
 
 .cal-day.today {
     border-color: var(--dash-primary);
-    background: rgba(79, 70, 229, 0.05);
+    background: rgba(212, 175, 55, 0.05);
 }
 
 .cal-date-num {

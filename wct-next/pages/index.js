@@ -10,7 +10,7 @@ import { marked } from 'marked';
             <div className="text-center mb-16 md:mb-24">
                 <motion.span 
                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    className="text-accent font-bold tracking-[0.2em] text-sm uppercase mb-4 inline-block drop-shadow-[0_0_10px_rgba(79,70,229,0.3)]"
+                    className="text-accent font-bold tracking-[0.2em] text-sm uppercase mb-4 inline-block drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]"
                 >
                     {subtitle}
                 </motion.span>
@@ -116,7 +116,7 @@ import { marked } from 'marked';
                 <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-darkbg/80 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl' : 'bg-transparent py-6 md:py-8'}`}>
                     <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center relative">
                         <a href="#home" className="text-2xl font-black tracking-tighter text-white flex items-center gap-2 z-50">
-                            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-darkbg text-xl font-bold shadow-[0_0_15px_rgba(79,70,229,0.5)]">Ç</div>
+                            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-darkbg text-xl font-bold shadow-[0_0_15px_rgba(212,175,55,0.5)]">Ç</div>
                             <span>ÇINAR <span className="text-gray-400 font-medium text-lg">DEMİRBAŞ</span></span>
                         </a>
                         
@@ -133,7 +133,7 @@ import { marked } from 'marked';
                         </nav>
 
                         <div className="hidden md:block">
-                            <a href="#contact" className="bg-accent text-darkbg px-6 py-2.5 rounded-full font-bold text-sm shadow-[0_0_15px_rgba(79,70,229,0.3)] hover:shadow-[0_0_25px_rgba(79,70,229,0.6)] hover:scale-105 transition-all">
+                            <a href="#contact" className="bg-accent text-darkbg px-6 py-2.5 rounded-full font-bold text-sm shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_25px_rgba(212,175,55,0.6)] hover:scale-105 transition-all">
                                 İletişime Geç
                             </a>
                         </div>
@@ -159,7 +159,7 @@ import { marked } from 'marked';
                                         {link.isNew && <span className="bg-accent/20 text-accent text-sm px-3 py-1 rounded-full uppercase tracking-wider relative flex items-center"><span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-ping opacity-75"></span>Yeni</span>}
                                     </a>
                                 ))}
-                                <a href="#contact" onClick={() => setMobileOpen(false)} className="mt-4 bg-accent text-darkbg px-8 py-3 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(79,70,229,0.4)]">
+                                <a href="#contact" onClick={() => setMobileOpen(false)} className="mt-4 bg-accent text-darkbg px-8 py-3 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                                     İletişime Geç
                                 </a>
                             </motion.div>
@@ -185,7 +185,7 @@ import { marked } from 'marked';
                                     <img src="/images/ciko.jpeg" alt="Çınar Demirbaş" className="relative w-16 h-16 rounded-full border-2 border-white/10 object-cover shadow-xl" />
                                     <div className="absolute bottom-0 right-0 w-4 h-4 bg-accent border-2 border-darkbg rounded-full"></div>
                                 </div>
-                                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 liquid-glass text-accent font-bold text-xs uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(79,70,229,0.1)]">
+                                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 liquid-glass text-accent font-bold text-xs uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(212,175,55,0.1)]">
                                     <span className="relative flex h-2.5 w-2.5">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
@@ -194,13 +194,13 @@ import { marked } from 'marked';
                                 </div>
                             </div>
                             <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6">
-                                İşinizi büyütecek <br/><span className="text-accent drop-shadow-[0_0_15px_rgba(79,70,229,0.3)]">modern web siteleri</span> <br/>inşa ediyorum.
+                                İşinizi büyütecek <br/><span className="text-accent drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">modern web siteleri</span> <br/>inşa ediyorum.
                             </h1>
                             <p className="text-lg md:text-xl text-gray-400 leading-relaxed mb-10 max-w-xl font-light">
                                 Markanıza özel, müşteri çeken ve sonuç odaklı, hızlı, duyarlı ve yüksek dönüşüm sağlayan web çözümleri.
                             </p>
                             <div className="flex flex-wrap items-center gap-5">
-                                <a href="#portfolio" className="relative overflow-hidden bg-accent text-darkbg px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(79,70,229,0.4)] hover:shadow-[0_0_35px_rgba(79,70,229,0.6)] hover:-translate-y-1 transition-all duration-300">
+                                <a href="#portfolio" className="relative overflow-hidden bg-accent text-darkbg px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_35px_rgba(212,175,55,0.6)] hover:-translate-y-1 transition-all duration-300">
                                     <span className="absolute top-0 bottom-0 w-12 bg-white/30 blur-[10px] -skew-x-[30deg] animate-shine z-0"></span>
                                     <span className="relative z-10">Portfolyo</span>
                                 </a>
@@ -333,7 +333,7 @@ import { marked } from 'marked';
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {services.map((srv, idx) => (
                                 <Reveal key={idx} delay={idx * 0.1}>
-                                    <div className="bg-white/[0.02] border border-white/5 liquid-glass p-8 rounded-[20px] hover:border-accent/50 hover:bg-white/[0.04] transition-all duration-500 group h-full shadow-lg hover:shadow-[0_0_30px_rgba(79,70,229,0.15)] relative overflow-hidden">
+                                    <div className="bg-white/[0.02] border border-white/5 liquid-glass p-8 rounded-[20px] hover:border-accent/50 hover:bg-white/[0.04] transition-all duration-500 group h-full shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-[50px] group-hover:bg-accent/20 transition-colors duration-500 pointer-events-none"></div>
                                         <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center text-accent mb-6 group-hover:animate-bounce group-hover:bg-accent group-hover:text-darkbg transition-all duration-500 shadow-inner">
                                             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={srv.icon}></path></svg>
@@ -480,10 +480,10 @@ import { marked } from 'marked';
             const [activeFilter, setActiveFilter] = useState('Tümü');
             
             const projects = [
-                { title: "Diyetisyen Web Sitesi", desc: "Sağlık profesyonellerinin hizmetlerini sergilemesi ve randevu alması için temiz, modern bir platform.", img: "https://placehold.co/800x600/111827/4f46e5?text=Dietitian+Website", demoUrl: "diyetisyen/index.html", tags: ["HTML", "CSS", "JS"], type: "web" },
-                { title: "Restoran Web Sitesi", desc: "Lüks, karanlık bir estetiğe sahip, iştah açıcı dijital menü ve rezervasyon sistemi.", img: "https://placehold.co/800x600/111827/4f46e5?text=Restaurant+Website", demoUrl: "restoran/index.html", tags: ["Next.js", "Tailwind"], type: "web" },
-                { title: "Fityet App", desc: "Fitness hedeflerini takip eden, diyet akışını sade bir arayüzde sunan mobil uygulama.", img: "https://placehold.co/800x600/111827/4f46e5?text=Fityet+App", demoUrl: "https://deft-moxie-b99094.netlify.app/", tags: ["Flutter", "Dart", "Firebase"], type: "mobile" },
-                { title: "CarGallery Game", desc: "Araçları interaktif olarak inceleyebileceğiniz üç boyutlu araba galerisi simülasyonu.", img: "https://placehold.co/800x600/111827/4f46e5?text=CarGallery+Game", demoUrl: "https://roaring-frangollo-a9154d.netlify.app/", tags: ["Unity", "C#", "3D"], type: "mobile" }
+                { title: "Diyetisyen Web Sitesi", desc: "Sağlık profesyonellerinin hizmetlerini sergilemesi ve randevu alması için temiz, modern bir platform.", img: "https://placehold.co/800x600/111827/d4af37?text=Dietitian+Website", demoUrl: "diyetisyen/index.html", tags: ["HTML", "CSS", "JS"], type: "web" },
+                { title: "Restoran Web Sitesi", desc: "Lüks, karanlık bir estetiğe sahip, iştah açıcı dijital menü ve rezervasyon sistemi.", img: "https://placehold.co/800x600/111827/d4af37?text=Restaurant+Website", demoUrl: "restoran/index.html", tags: ["Next.js", "Tailwind"], type: "web" },
+                { title: "Fityet App", desc: "Fitness hedeflerini takip eden, diyet akışını sade bir arayüzde sunan mobil uygulama.", img: "https://placehold.co/800x600/111827/d4af37?text=Fityet+App", demoUrl: "https://deft-moxie-b99094.netlify.app/", tags: ["Flutter", "Dart", "Firebase"], type: "mobile" },
+                { title: "CarGallery Game", desc: "Araçları interaktif olarak inceleyebileceğiniz üç boyutlu araba galerisi simülasyonu.", img: "https://placehold.co/800x600/111827/d4af37?text=CarGallery+Game", demoUrl: "https://roaring-frangollo-a9154d.netlify.app/", tags: ["Unity", "C#", "3D"], type: "mobile" }
             ];
 
             const allTags = ['Tümü', ...Array.from(new Set(projects.flatMap(p => p.tags)))];
@@ -499,7 +499,7 @@ import { marked } from 'marked';
                                 <button 
                                     key={tag}
                                     onClick={() => setActiveFilter(tag)}
-                                    className={`px-5 py-2 rounded-full font-bold text-sm transition-all duration-300 ${activeFilter === tag ? 'bg-accent text-darkbg shadow-[0_0_15px_rgba(79,70,229,0.4)]' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'}`}
+                                    className={`px-5 py-2 rounded-full font-bold text-sm transition-all duration-300 ${activeFilter === tag ? 'bg-accent text-darkbg shadow-[0_0_15px_rgba(212,175,55,0.4)]' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'}`}
                                 >
                                     {tag}
                                 </button>
@@ -516,7 +516,7 @@ import { marked } from 'marked';
                                         exit={{ opacity: 0, scale: 0.9 }}
                                         transition={{ duration: 0.3 }}
                                         key={proj.title}
-                                        className="group rounded-[20px] bg-darkbg border border-white/10 overflow-hidden hover:border-accent/40 hover:shadow-[0_0_40px_rgba(79,70,229,0.1)] transition-all duration-500 cursor-pointer"
+                                        className="group rounded-[20px] bg-darkbg border border-white/10 overflow-hidden hover:border-accent/40 hover:shadow-[0_0_40px_rgba(212,175,55,0.1)] transition-all duration-500 cursor-pointer"
                                         onClick={() => setSelectedProject(proj)}
                                     >
                                         <div className="relative h-64 sm:h-80 overflow-hidden bg-[#111827]">
@@ -524,7 +524,7 @@ import { marked } from 'marked';
                                             <div className="absolute inset-0 bg-gradient-to-t from-darkbg via-transparent to-transparent opacity-80"></div>
                                         </div>
                                         <div className="p-8 relative">
-                                        <div className="absolute -top-8 right-8 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-darkbg font-bold shadow-[0_0_15px_rgba(79,70,229,0.5)] opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(79,70,229,0.8)] transition-all duration-500 z-20">
+                                        <div className="absolute -top-8 right-8 w-16 h-16 bg-accent rounded-full flex items-center justify-center text-darkbg font-bold shadow-[0_0_15px_rgba(212,175,55,0.5)] opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.8)] transition-all duration-500 z-20">
                                             <svg className="w-8 h-8 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                             </div>
                                             <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{proj.title}</h3>
@@ -588,7 +588,7 @@ import { marked } from 'marked';
         // --- MINI ARAÇ (TOOLS) BİLEŞENLERİ ---
 
         const ColorPaletteTool = () => {
-            const [colors, setColors] = useState(['#4f46e5', '#111827', '#1f2937', '#374151', '#4b5563']);
+            const [colors, setColors] = useState(['#d4af37', '#111827', '#1f2937', '#374151', '#4b5563']);
             const generate = () => setColors(Array(5).fill(0).map(() => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0')));
             const copy = (c) => { navigator.clipboard.writeText(c); alert(c + ' kopyalandı!'); };
             return (
@@ -600,7 +600,7 @@ import { marked } from 'marked';
                             </div>
                         ))}
                     </div>
-                    <button onClick={generate} className="w-full py-3 bg-accent text-darkbg font-bold rounded-xl shadow-[0_0_15px_rgba(79,70,229,0.3)] hover:opacity-90 transition-opacity">Yeni Palet Üret</button>
+                    <button onClick={generate} className="w-full py-3 bg-accent text-darkbg font-bold rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:opacity-90 transition-opacity">Yeni Palet Üret</button>
                     <p className="text-gray-400 text-xs text-center">Renk kodunu (HEX) panoya kopyalamak için rengin üzerine tıklayın.</p>
                 </div>
             );
@@ -610,7 +610,7 @@ import { marked } from 'marked';
             const [x, setX] = useState(10); const [y, setY] = useState(10);
             const [blur, setBlur] = useState(25); const [spread, setSpread] = useState(0);
             const [opacity, setOpacity] = useState(0.3);
-            const shadow = `${x}px ${y}px ${blur}px ${spread}px rgba(79, 70, 229, ${opacity})`;
+            const shadow = `${x}px ${y}px ${blur}px ${spread}px rgba(212, 175, 55, ${opacity})`;
             return (
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-4">
@@ -775,7 +775,7 @@ import { marked } from 'marked';
         };
 
         const GradientTool = () => {
-            const [c1, setC1] = useState('#4f46e5'); const [c2, setC2] = useState('#0a0f16'); const [deg, setDeg] = useState(135);
+            const [c1, setC1] = useState('#d4af37'); const [c2, setC2] = useState('#0a0f16'); const [deg, setDeg] = useState(135);
             const bg = `linear-gradient(${deg}deg, ${c1}, ${c2})`;
             return (
                 <div className="grid md:grid-cols-2 gap-8">
@@ -817,7 +817,7 @@ import { marked } from 'marked';
             return (
                 <div className="flex flex-col items-center space-y-6">
                     <input type="text" value={url} onChange={e=>setUrl(e.target.value)} className="w-full bg-[#0a0f16] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent outline-none" placeholder="URL veya metin girin..." />
-                    <div className="bg-white p-4 rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.3)]"><img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`} alt="QR Kod" loading="lazy" /></div>
+                    <div className="bg-white p-4 rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.3)]"><img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`} alt="QR Kod" loading="lazy" /></div>
                 </div>
             );
         };
@@ -846,7 +846,7 @@ import { marked } from 'marked';
         };
 
         const ColorConverterTool = () => {
-            const [hex, setHex] = useState('#4f46e5');
+            const [hex, setHex] = useState('#d4af37');
             const hexToRgb = (h) => {
                 let r = 0, g = 0, b = 0;
                 if(h.length === 4) { r = parseInt(h[1]+h[1], 16); g = parseInt(h[2]+h[2], 16); b = parseInt(h[3]+h[3], 16); }
@@ -1128,7 +1128,7 @@ import { marked } from 'marked';
 
                         {tools.length > 4 && (
                             <div className="mt-12 flex justify-center">
-                                <button onClick={() => setShowAll(!showAll)} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)]' : 'bg-white/5 border border-white/10 liquid-glass text-gray-400 hover:bg-white/10 hover:text-white'}`}>
+                                <button onClick={() => setShowAll(!showAll)} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]' : 'bg-white/5 border border-white/10 liquid-glass text-gray-400 hover:bg-white/10 hover:text-white'}`}>
                                     {showAll ? 'Daha Az Göster' : 'Tüm Araçları Göster'}
                                     <svg className={`w-5 h-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
@@ -1174,7 +1174,7 @@ import { marked } from 'marked';
                             {reviews.map((rev, i) => (
                                 <Reveal key={i} delay={i * 0.15}>
                                     <div className="bg-white/[0.02] border border-white/10 p-8 rounded-[20px] relative hover:bg-white/[0.04] transition-colors">
-                                        <div className="absolute -top-5 left-8 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-darkbg font-bold text-xl shadow-[0_0_15px_rgba(79,70,229,0.3)]">"</div>
+                                        <div className="absolute -top-5 left-8 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-darkbg font-bold text-xl shadow-[0_0_15px_rgba(212,175,55,0.3)]">"</div>
                                         <p className="text-gray-300 italic mb-6 mt-4 leading-relaxed">"{rev.text}"</p>
                                         <div><h4 className="text-white font-bold">{rev.name}</h4><p className="text-accent text-sm">{rev.role}</p></div>
                                     </div>
@@ -1220,7 +1220,7 @@ import { marked } from 'marked';
                                 {steps.map((step, i) => (
                                     <Reveal key={i} delay={i * 0.15} className="flex flex-col items-center text-center group">
                                         <div onClick={(e) => handleStepClick(e, i)} className="cursor-pointer flex flex-col items-center w-full">
-                                            <div className={`w-20 h-20 rounded-full border-4 flex items-center justify-center text-2xl font-black mb-6 relative transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] z-10 ${expandedIndex === i ? 'bg-accent border-accent text-darkbg shadow-[0_0_25px_rgba(79,70,229,0.5)] scale-110' : 'bg-darkbg border-white/10 text-white group-hover:border-accent group-hover:text-accent group-hover:shadow-[0_0_25px_rgba(79,70,229,0.3)]'}`}>
+                                            <div className={`w-20 h-20 rounded-full border-4 flex items-center justify-center text-2xl font-black mb-6 relative transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] z-10 ${expandedIndex === i ? 'bg-accent border-accent text-darkbg shadow-[0_0_25px_rgba(212,175,55,0.5)] scale-110' : 'bg-darkbg border-white/10 text-white group-hover:border-accent group-hover:text-accent group-hover:shadow-[0_0_25px_rgba(212,175,55,0.3)]'}`}>
                                                 {i + 1}
                                             </div>
                                             <h4 className={`text-xl font-bold mb-3 transition-colors ${expandedIndex === i ? 'text-accent' : 'text-white'}`}>{step.title}</h4>
@@ -1319,7 +1319,7 @@ import { marked } from 'marked';
                         </div>
                         {items.length > 4 && (
                             <div className="mt-12 flex justify-center">
-                                <button onClick={toggleShowAll} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)]' : 'bg-white/5 border border-white/10 liquid-glass text-gray-400 hover:bg-white/10 hover:text-white'}`}>
+                                <button onClick={toggleShowAll} className={`flex items-center gap-3 px-8 py-3 font-bold rounded-full transition-all duration-300 group ${showAll ? 'bg-accent text-darkbg shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]' : 'bg-white/5 border border-white/10 liquid-glass text-gray-400 hover:bg-white/10 hover:text-white'}`}>
                                     {showAll ? 'Daha Az Göster' : 'Tüm Terimleri Göster'}
                                     <svg className={`w-5 h-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
@@ -1428,7 +1428,7 @@ import { marked } from 'marked';
                                 {filteredPosts.map((post, i) => (
                                     <Reveal key={post.id} delay={i * 0.15}>
                                         <div 
-                                            className="group rounded-[20px] bg-white/[0.02] border border-white/10 overflow-hidden hover:border-accent/40 hover:shadow-[0_0_40px_rgba(79,70,229,0.1)] transition-all duration-500 cursor-pointer flex flex-col h-full"
+                                            className="group rounded-[20px] bg-white/[0.02] border border-white/10 overflow-hidden hover:border-accent/40 hover:shadow-[0_0_40px_rgba(212,175,55,0.1)] transition-all duration-500 cursor-pointer flex flex-col h-full"
                                             onClick={() => setSelectedPost(post)}
                                         >
                                             <div className="relative h-56 overflow-hidden bg-[#111827]">
@@ -1581,7 +1581,7 @@ import { marked } from 'marked';
                                             <label className="block text-gray-400 text-sm mb-2">Mesajınız</label>
                                             <textarea required name="message" minLength="10" value={formData.message} onChange={handleChange} rows="4" className="w-full bg-[#0a0f16] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent outline-none transition-colors resize-none" placeholder="Projenizden veya fikrinizden bahsedin..."></textarea>
                                         </div>
-                                        <button disabled={status === 'loading'} type="submit" className="w-full bg-accent text-darkbg font-bold py-4 rounded-xl shadow-[0_0_15px_rgba(79,70,229,0.3)] hover:shadow-[0_0_25px_rgba(79,70,229,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2">
+                                        <button disabled={status === 'loading'} type="submit" className="w-full bg-accent text-darkbg font-bold py-4 rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2">
                                             {status === 'loading' ? (
                                                 <><div className="w-5 h-5 border-2 border-darkbg border-t-transparent rounded-full animate-spin"></div> Gönderiliyor...</>
                                             ) : 'Gönder'}
@@ -1719,7 +1719,7 @@ import { marked } from 'marked';
                         <meta name="description" content="İşinizi büyütecek modern web siteleri inşa ediyorum. Markanız için hızlı, duyarlı ve yüksek dönüşüm sağlayan web çözümleri." />
                         <link rel="canonical" href="https://cinardemirbas.com.tr/" />
                         <link rel="alternate" type="application/rss+xml" title="Çınar Demirbaş | Blog RSS" href="https://cinardemirbas.com.tr/feed.xml" />
-                        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0f16'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial, sans-serif' font-weight='bold' fill='%234f46e5' text-anchor='middle'%3E%C3%87%3C/text%3E%3C/svg%3E" />
+                        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0f16'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial, sans-serif' font-weight='bold' fill='%23d4af37' text-anchor='middle'%3E%C3%87%3C/text%3E%3C/svg%3E" />
                         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
                         <meta name="theme-color" content="#0a0f16" />
                         <meta name="robots" content="index, follow" />
