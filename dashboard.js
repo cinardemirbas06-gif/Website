@@ -1580,7 +1580,7 @@ async function initAnalysis() {
         const lineCanvas = document.getElementById('lineChart');
         const lineCtx = lineCanvas.getContext('2d');
         const lineGrad = lineCtx.createLinearGradient(0, 0, 0, lineCanvas.parentElement.offsetHeight || 300);
-        lineGrad.addColorStop(0, 'rgba(0, 122, 255, 0.5)'); lineGrad.addColorStop(1, 'rgba(0, 122, 255, 0.0)');
+        lineGrad.addColorStop(0, 'rgba(212, 175, 55, 0.5)'); lineGrad.addColorStop(1, 'rgba(212, 175, 55, 0.0)');
 
         const currentMonthDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
         const days = Array.from({length: currentMonthDays}, (_, i) => i + 1);
@@ -1602,7 +1602,7 @@ async function initAnalysis() {
                 datasets: [{
                     label: 'Günlük Gider',
                     data: dailyExp,
-                    borderColor: '#007aff',
+                    borderColor: '#d4af37',
                     backgroundColor: lineGrad,
                     borderWidth: 3, fill: true, tension: 0.4, pointRadius: 0, pointHitRadius: 10
                 }]
@@ -1788,7 +1788,7 @@ async function initPlanner() {
             });
 
             let summaryHtml = '';
-            if (planCount > 0) summaryHtml += `<div class="cal-val" style="background:rgba(0,122,255,0.15); color:var(--dash-primary); font-size:10px;">${planCount} Plan</div>`;
+            if (planCount > 0) summaryHtml += `<div class="cal-val" style="background:rgba(212,175,55,0.15); color:var(--dash-primary); font-size:10px;">${planCount} Plan</div>`;
 
             const isTodayClass = isToday(dateStr) ? 'today' : '';
 
