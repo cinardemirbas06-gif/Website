@@ -20,11 +20,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          # FTP hesabının kökü /public_html (cinardemirbas.com'un belge kök dizini).
-          # Gerçek site olan cinardemirbas.com.tr ise "addon domain" olarak
-          # /public_html/cinardemirbas.com.tr altında yaşıyor, o yüzden dosyaları
-          # oraya yüklemeliyiz.
-          server-dir: /cinardemirbas.com.tr/
+          # FTP hesabı doğrudan public_html/cinardemirbas.com.tr dizinine
+          # kilitlendiği için FTP girişinde zaten doğru klasördeyiz.
+          server-dir: /
           exclude: |
             **/.git*
             **/.git*/**
