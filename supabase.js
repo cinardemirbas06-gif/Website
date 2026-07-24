@@ -3,8 +3,8 @@
  * Kendi Supabase projenizi oluşturduğunuzda URL ve KEY alanlarını güncelleyin.
  */
 
-const SUPABASE_URL = 'https://znzktpbgngksgastbeev.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_avOlt4hF0mnXeEBFIpMdng_YKj2jloU';
+const SUPABASE_URL = 'https://welnvftcvovkbaoxpymv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_IKuO9fu4Qa-_i7h4nsA8eQ_FjAnhxpN';
 
 // Supabase Client
 window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
