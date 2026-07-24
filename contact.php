@@ -9,6 +9,11 @@ require 'src/Exception.php';
 require 'src/PHPMailer.php';
 require 'src/SMTP.php';
 
+// smtp-config.php sunucuda elle oluşturulur ve asla git'e commit edilmez (bkz. smtp-config.example.php)
+if (file_exists(__DIR__ . '/smtp-config.php')) {
+    require __DIR__ . '/smtp-config.php';
+}
+
 header('Content-Type: application/json; charset=UTF-8');
 
 $payload = file_get_contents('php://input');
@@ -45,15 +50,16 @@ $mail = new PHPMailer(true);
 try {
     // Sunucu Ayarları
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Hata ayıklama için bu satırı aktif edebilirsiniz
-    $smtpUser = getenv('SMTP_USERNAME');
-    $smtpPass = getenv('SMTP_PASSWORD');
+    $smtpUser = defined('SMTP_USERNAME') ? SMTP_USERNAME : getenv('SMTP_USERNAME');
+    $smtpPass = defined('SMTP_PASSWORD') ? SMTP_PASSWORD : getenv('SMTP_PASSWORD');
+    $smtpHost = defined('SMTP_HOST') ? SMTP_HOST : getenv('SMTP_HOST');
     if (!$smtpUser || !$smtpPass) {
-        error_log('contact.php: SMTP_USERNAME / SMTP_PASSWORD ortam değişkenleri tanımlı değil.');
+        error_log('contact.php: SMTP_USERNAME / SMTP_PASSWORD tanımlı değil (smtp-config.php eksik olabilir).');
         respond(false, 'Sunucu yapılandırma hatası. Lütfen daha sonra tekrar deneyin.');
     }
 
     $mail->isSMTP();
-    $mail->Host       = getenv('SMTP_HOST') ?: 'mail.cinardemirbas.com.tr';
+    $mail->Host       = $smtpHost ?: 'mail.cinardemirbas.com.tr';
     $mail->SMTPAuth   = true;
     $mail->Username   = $smtpUser;
     $mail->Password   = $smtpPass;
