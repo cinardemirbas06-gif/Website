@@ -1,3 +1,12 @@
 smtp-config.php
 analytics.log
 error.log
+
+# webcreatortr.html ve _next/, wct-next/ Next.js projesinden CI'da
+# otomatik üretilir (bkz. .github/workflows/deploy.yml). Elle düzenlemeyin,
+# kaynak kod wct-next/pages/webcreatortr.js içindedir.
+webcreatortr.html
+_next/
+wct-next/node_modules/
+wct-next/out/
+wct-next/.next/

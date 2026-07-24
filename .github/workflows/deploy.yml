@@ -13,6 +13,25 @@ jobs:
       - name: Kodu çek
         uses: actions/checkout@v4
 
+      - name: Node.js kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: wct-next/package-lock.json
+
+      - name: WebCreatorTR'yi derle (Next.js static export)
+        working-directory: wct-next
+        run: |
+          npm ci
+          npm run build
+
+      - name: Derlenen çıktıyı köke kopyala
+        run: |
+          cp wct-next/out/webcreatortr.html webcreatortr.html
+          rm -rf _next
+          cp -r wct-next/out/_next _next
+
       - name: cPanel'e yükle
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -29,3 +48,4 @@ jobs:
             **/.github/**
             **/smtp-config.php
             **/README.md
+            **/wct-next/**
