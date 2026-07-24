@@ -1,0 +1,31 @@
+name: cPanel'e FTP ile Otomatik Yayınla
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ftp-deploy:
+    name: FTP Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v4
+
+      - name: cPanel'e yükle
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          # cPanel'de sitenin gerçek dosya yolu farklıysa bu satırı güncelle
+          # (genelde public_html, bazı hostinglerde public_html/siteadi.com gibi olabilir)
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/smtp-config.php
+            **/README.md
